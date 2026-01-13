@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Form</title>
+    <link rel="icon" href="" type="image/png">
+    <style>
+        form {
+            background-color:rgb(235, 206, 211);
+            font-family:Verdana, Tahoma, sans-serif;
+            box-shadow: 3px 6px 8px #888888;
+            border-radius: 15px;
+        }        
+        form label {
+            color:rgb(59, 44, 34);
+        }
+        input:focus {
+            background-color:rgb(180, 150, 155);
+        }
+        select:focus {
+            background-color:rgb(180, 150, 155);
+        }
+        textarea:focus {
+            background-color:rgb(180, 150, 155);
+        }
+        legend {
+            color:rgb(26, 16, 9);
+        }
+        fieldset {
+            color:rgb(180, 150, 155);
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <form id="dForm" action="submit" method="post">
+
+    <fieldset>
+        <legend>Your Credentials</legend><br/>
+        <label> Student ID: 
+            <input type="number" id="sID" name="sID" required />
+        </label><br/><br/>
+        <label> Full Name: 
+            <input type="text" id="name" name="name" required />
+        </label><br/><br/>
+        <label> Birthday:
+            <input type="date" id="bday" name="bday" required />
+        </label><br/><br/>
+        <label> Email Address: 
+            <input type="email" id="email" name="email" required />
+        </label><br/><br/>
+    </fieldset>
+
+    <fieldset>
+        <legend>Information</legend><br/>
+        <label> Mobile Phone: 
+            <input type="text" id="phone" name="phone" required />
+        </label><br/><br/>
+        <label> Grade Level:
+            <select id="grLvl" name="grLvl" required>
+                <option value="7">Grade 7</option>
+                <option value="8">Grade 8</option>
+                <option value="9">Grade 9</option>
+                <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
+                <option value="12">Grade 12</option>
+            </select>
+        </label><br/><br/>
+        <label> Intern / Extern:
+            <input type="radio" name="in/ex" value="intern" required /> Intern
+            <input type="radio" name="in/ex" value="extern" /> Extern
+        </label><br/><br/>
+        <label> Preferred Organization / Club: 
+            <select id="prefClub" name="prefClub" required>
+                <option value="astro">AstroSoc</option>
+                <option value="bake">Bake Club</option>
+                <option value="expo">Exposure</option>
+                <option value="karyo">Karyo Biomedical Society</option>
+                <option value="sagala">Sagala</option>
+            </select>
+        </label><br/><br/>
+        <label> Why do you want to join? 
+            <textarea name="why" id="why" required>
+            </textarea>
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Action Buttons</legend><br/>
+        <button type="submit"> Accept </button>
+        <input type="reset" value=" Clear " />
+      </fieldset> 
+
+    </form>
+
+</body>
+</html>

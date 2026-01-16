@@ -42,13 +42,13 @@
             <input type="number" id="sID" name="sID" required />
         </label><br/><br/>
         <label> Full Name: 
-            <input onblur="blur()" type="text" id="name" name="name" required />
+            <input type="text" id="name" name="name" required onblur="validateName()" />
         </label><br/><br/>
         <label> Birthday:
             <input type="date" id="bday" name="bday" required />
         </label><br/><br/>
         <label> Email Address: 
-            <input type="email" id="email" name="email" required />
+            <input type="email" id="email" name="email" required onblur="validateEmail()" />
         </label><br/><br/>
     </fieldset>
 
@@ -88,23 +88,43 @@
 
     <fieldset>
         <legend>Action Buttons</legend><br/>
-        <button onsubmit="submit()" type="submit"> Accept </button>
+        <button type="submit"> Accept </button>
         <input type="reset" value=" Clear " />
       </fieldset> 
 
     </form>
 
     <script>
-        function submit() {
-           let confirmed =confirm("Are you sure you want to submit?") 
-            if (confirmed) {
-                alert(Form Submitted);
-            }
-        }
+        form.addEventListener("reset", function(e) {  
+             if (!confirm("Sure you want to clear your data?")) {
+            e.preventDefault(); 
+    }
+    });
 
-        function blur() {
-            
-        }
+    function validateName() {
+    const name = document.getElementById("name");
+    const error = document.getElementById("nameError");
+
+    if (name.value.trim() === "") {
+        error.style.display = "block";
+        name.style.border = "2px solid red";
+    } else {
+        error.style.display = "none";
+        name.style.border = "";
+    }
+}
+    function validateName() {
+    const name = document.getElementById("name");
+    const error = document.getElementById("nameError");
+
+    if (name.value.trim() === "") {
+        error.style.display = "block";
+        name.style.border = "2px solid red";
+    } else {
+        error.style.display = "none";
+        name.style.border = "";
+    }
+}
     </script>
 </body>
 </html>

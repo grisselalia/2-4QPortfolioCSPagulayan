@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Club Sign-ups</title>
+<style>
+     body {
+    font-family: 'Poppins', sans-serif;
+    color: rgb(196, 128, 142);  
+    background: #c8deca;
+    padding: 20px;
+    min-height: 100vh;
+   }
+     .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+  }
+  .filter-section {
+    margin: 20px 0;
+    text-align: center;
+  }
+    label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; 
+    font-size: 1rem; 
+    color: rgb(217, 140, 161);  
+    margin-right: 10px;
+  }
+    table {
+    width: 100%;
+    margin: 20px auto;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border-collapse: collapse;
+  }
+
+  th {
+    background:#d99db5;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  td {
+    padding: 12px;
+    border-bottom: 1px solid #ffe7f1;
+    font-size: 14px;
+    color: #333;
+  }
+
+  tr:nth-child(even) {
+    background-color: #fff9fc;
+  }
+
+  tr:hover {
+    background-color: #fff0f5;
+  }
+
+  .no-signups {
+    text-align: center;
+    padding: 40px;
+    color: rgb(216, 135, 152);
+    font-size: 16px;
+    background-color: #fff9fc;
+    border: 2px dashed rgb(255, 201, 212);
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+a {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 10px 20px;
+    background:#d99db5;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Show List of Students Who Signed-Up</h1>
+
+  <a href="Q3_2GCesiumPagulayan.html">← Back to Sign-Up Page</a>
+
+  <div class="filter-section">
+    <label>
+      Select Your Club:
+      <select id="filter" onchange="loadSignups()">
+        <option value="ALL">-- Select an option --</option>
+        <option value="astro">AstroSoc</option>
+        <option value="bake">Bake Club</option>
+        <option value="expo">Exposure</option>
+        <option value="karyo">Karyo Biomedical Society</option>
+        <option value="sagala">Sagala</option>
+      </select>
+    </label>
+  </div>
+
+  <p id="total"></p>
+
+  <div id="output"></div>
+</div>
+
+<script>
+  function loadSignups() {
+    const data = JSON.parse(localStorage.getItem("signUps"));
+
+    const output = document.getElementById("output");
+    const total = document.getElementById("total");
+
+    if (!data || data.length === 0) {
+      output.innerHTML = '<div class="no-signups">No sign-ups stored yet.</div>';
+      total.innerText = "";
+      return;
+    }
+
+    const filter = document.getElementById("filter").value;
+    const filtered = filter === "ALL"
+      ? data
+      : data.filter(s => s.prefClub === filter);
+
+    if (filtered.length === 0) {
+      output.innerHTML = '<div class="no-signups">No Sign Ups for this club</div>';
+      total.innerText = "Total Signup: 0";
+      return;
+    }
+
+    let html = `
+      <table>
+        <thead>
+          <tr>
+            <th>Club</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Grade</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Intern/Extern</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    filtered.forEach(s => {
+      html += `
+        <tr>
+          <td>${s.prefClub}</td>
+          <td>${s.sID}</td>
+          <td>${s.name}</td>
+          <td>${s.grLvl}</td>
+          <td>${s.email}</td>
+          <td>${s.phone}</td>
+          <td>${s.home}</td>
+        </tr>
+      `;
+    });
+
+    html += `
+        </tbody>
+      </table>
+    `;
+
+    output.innerHTML = html;
+    total.innerText = "Total Signup: " + filtered.length;
+  }
+
+  window.onload = loadSignups;
+</script>
+
+</body>
+</html>

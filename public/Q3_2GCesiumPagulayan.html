@@ -34,31 +34,35 @@
     </style>
 </head>
 <body>
-    <form id="dForm" action="submit" method="post" onreset="">
+    <h1>Club Application Form</h1>
+    <form onsubmit="return validateSubmission();" onreset="return validateReset();">
 
     <fieldset>
-        <legend>Your Credentials</legend><br/>
+        <legend>Student Information</legend><br/>
+
         <label> Student ID: 
-            <input type="number" id="sID" name="sID" required />
+            <input type="number" id="sID" name="sID" required onblur="checkEmpty(this)"/>
         </label><br/><br/>
+
         <label> Full Name: 
-            <input type="text" id="name" name="name" required onblur="validateName()" />
+            <input type="text" id="name" name="name" required onblur="checkEmpty(this)" />
         </label><br/><br/>
         <label> Birthday:
-            <input type="date" id="bday" name="bday" required />
+            <input type="date" id="bday" name="bday" required onblur="checkEmpty(this)"/>
         </label><br/><br/>
         <label> Email Address: 
-            <input type="email" id="email" name="email" required onblur="validateEmail()" />
+            <input type="email" id="email" name="email" required onblur="checkEmpty(this)" />
+        </label><br/><br/>
+        <label> Mobile Phone: 
+            <input type="text" id="phone" name="phone" required onblur="checkEmpty(this)"/>
         </label><br/><br/>
     </fieldset>
 
     <fieldset>
-        <legend>Information</legend><br/>
-        <label> Mobile Phone: 
-            <input type="text" id="phone" name="phone" required />
-        </label><br/><br/>
+        <legend>Club Membership Information</legend><br/>
         <label> Grade Level:
-            <select id="grLvl" name="grLvl" required>
+            <select id="grLvl" name="grLvl" required onblur="checkEmpty(this)">
+                <option value="">Select your grade level</option>
                 <option value="7">Grade 7</option>
                 <option value="8">Grade 8</option>
                 <option value="9">Grade 9</option>
@@ -67,12 +71,13 @@
                 <option value="12">Grade 12</option>
             </select>
         </label><br/><br/>
-        <label> Intern / Extern:
-            <input type="radio" name="in/ex" value="intern" required /> Intern
-            <input type="radio" name="in/ex" value="extern" /> Extern
-        </label><br/><br/>
+        <label> Intern / Extern:</label>
+            <input type="radio" name="home" value="intern" required /> Intern
+            <input type="radio" name="home" value="extern" required/> Extern
+            <br/><br/>
         <label> Preferred Organization / Club: 
-            <select id="prefClub" name="prefClub" required>
+            <select id="prefClub" name="prefClub" required onblur="checkEmpty(this)">
+                <option value="">Select a club</option>
                 <option value="astro">AstroSoc</option>
                 <option value="bake">Bake Club</option>
                 <option value="expo">Exposure</option>
@@ -81,50 +86,83 @@
             </select>
         </label><br/><br/>
         <label> Why do you want to join? 
-            <textarea name="why" id="why" required>
+            <textarea name="why" rows="4" required onblur="checkEmpty(this)">
             </textarea>
         </label>
     </fieldset>
 
     <fieldset>
         <legend>Action Buttons</legend><br/>
-        <button type="submit"> Accept </button>
-        <input type="reset" value=" Clear " />
+        <input type="submit" value="Submit">
+        <input type="button" onclick="goToView()" value="View Sign-Ups">
+        <input type="reset" value="Reset">
       </fieldset> 
 
     </form>
 
     <script>
-        form.addEventListener("reset", function(e) {  
-             if (!confirm("Sure you want to clear your data?")) {
-            e.preventDefault(); 
+        function validateSubmission() {
+    if (!confirm("Are you sure you want to submit your application?")) {
+      return false;
     }
-    });
 
-    function validateName() {
-    const name = document.getElementById("name");
-    const error = document.getElementById("nameError");
+     const form = document.forms[0];
+    
+    // Get existing signups
+    let signUps = JSON.parse(localStorage.getItem("signUps")) || [];
 
-    if (name.value.trim() === "") {
-        error.style.display = "block";
-        name.style.border = "2px solid red";
+    // Check for duplicate student ID
+    const studentId = form.sID.value;
+    const duplicate = signUps.find(s => s.sID === studentId);
+    
+    if (duplicate) {
+      alert("This Student ID has already been registered!");
+      return false;
+    }
+
+    // Create new signup object
+    const newSignup = {
+      sID: studentId,
+      name: form.name.value,
+      bday: form.bday.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      grLvl: form.grLvl.value,
+      home: form.home.value,
+      prefClub: form.prefClub.value,
+      why: form.why.value
+    };
+
+    // Save to localStorage
+    signUps.push(newSignup);
+    localStorage.setItem("signUps", JSON.stringify(signUps));
+
+    alert("Sign-up saved successfully!");
+    form.reset();
+
+    return false;
+  }
+
+  function goToView() {
+    window.location.href = "Q3_3GCesiumPagulayan.html";
+  }
+
+  function validateReset() {
+    return confirm("Are you sure you want to reset the form?");
+  }
+
+  function checkEmpty(field) {
+    if (field.value.trim() === "") {
+      field.classList.add("error");
+      field.classList.remove("valid");
     } else {
-        error.style.display = "none";
-        name.style.border = "";
+      field.classList.remove("error");
+      field.classList.add("valid");
     }
-}
-    function validateName() {
-    const name = document.getElementById("name");
-    const error = document.getElementById("nameError");
+  }
+</script>
 
-    if (name.value.trim() === "") {
-        error.style.display = "block";
-        name.style.border = "2px solid red";
-    } else {
-        error.style.display = "none";
-        name.style.border = "";
-    }
-}
+</body>
     </script>
 </body>
 </html>

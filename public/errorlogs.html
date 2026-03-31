@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="author" content="Grissel Alia R. Pagulayan">
+  <meta name="description" content="testing and debugging">
+  <meta name="keywords" content="testing and debugging">
+  <title>CS3 Q4 3rd Graded Exercise - PAGULAYAN </title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+  <style>
+    tr:nth-child(1) ~ tr:nth-child(odd) {
+      background-color: lightgray;
+      color: black;
+    }
+    td, th {
+      padding: 10px;
+    }
+    table {
+      width: 90%;
+      margin: 0 auto;
+    }
+    caption {
+      font-size: 2em;
+      font-weight: bold;
+      padding: 10px;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="index.html#start">Table</a>
+      <a href="index.html#input">Input</a>
+      <a href="index.html#output">Output</a>
+    </nav>
+    
+    <h1 style="padding: 30px">Grissel Alia R. Pagulayan / 9-Cesium  - Mar 2026 </h1>
+  </header>
+
+  <section id="table">
+    <table> 
+      <caption> Error Logs - place errors found in the table below</caption>
+      <tr class="rColor">
+        <th> item# </th> 
+        <th> code line#<br/>CSS or JS </th> 
+        <th> Description</th>
+        <th> Correction Done</th>
+      </tr>
+      <tr>
+        <td> 1</td> 
+        <td> script.js line 1 </td> 
+        <td> the plotPoint() function does not have any parameters but it is called w/ arguments </td>
+        <td> added paremeters (x0, y0, x, y)</td>
+      </tr>
+      <tr>
+        <td> 2 </td> 
+        <td> script.js line 26 </td> 
+        <td> no closing bracket for the function</td>
+        <td> added a closing bracket</td>
+      </tr>
+      <tr>
+        <td> 3 </td> 
+        <td> script.js line 3</td> 
+        <td> in1 is not defined</td>
+        <td> use document.getElementById("in1").innerHTML</td>
+      </tr>
+      <tr>
+        <td> 4 </td> 
+        <td> script.js line 7-8</td> 
+        <td> point.styleleft and point.stylebottom use incorrect property names</td>
+        <td> change to point.style.left and point.style.bottom</td>
+      </tr>
+      <tr>
+        <td> 5 </td> 
+        <td> script.js missing line</td> 
+        <td> missing position styling (it wont move coz the position is not set)</td>
+        <td> add point.style.position = "absolute"</td>
+      </tr>
+      <tr>
+        <td> 6 </td> 
+        <td> script.js lines 13,16,19,22,25</td> 
+        <td> out1 is not defined as a variable</td>
+        <td> use document.getElementById("out1").innerHTML</td>
+      </tr>
+      <tr>
+        <td> 7 </td> 
+        <td> script.js line 2</td> 
+        <td> console.log(x0, y0, x, y) has undefined variables</td>
+        <td> already fixed because of the added parameters</td>
+      </tr>
+      <tr>
+        <td> 8 </td> 
+        <td> style.css line 39</td> 
+        <td> theres a space between a and :hover</td>
+        <td> change it to nav a:hover</td>
+      </tr>
+      <tr>
+        <td> 9 </td> 
+        <td> style.css line 32</td> 
+        <td> nav links are vertical instead of horizontal</td>
+        <td> switch the display to display: inline-block</td>
+      </tr>
+      <tr>
+        <td> 10 </td> 
+        <td> style.css missing line</td> 
+        <td> navigation bar is not fixed at the top</td>
+        <td> add position: fixed to nav</td>
+      </tr>
+     
+    </table>
+    <hr>
+  </section>
+  
+   
+  <!--- anchors for socmed site are done with image sprites -->
+  <footer>
+    <a href="https://facebook.com"> 
+    <div class="icon facebook"></div>
+    </a>
+    <a href="https://twitter.com">
+    <div class="icon twitter"></div>
+    </a>
+    <a href="https://github.com">
+    <div class="icon github"></div>
+    </a>
+  </footer>
+ 
+</body>
+
+</html>
